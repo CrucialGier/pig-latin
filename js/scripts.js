@@ -24,5 +24,18 @@ $(document).ready(function() {
   event.preventDefault();
   });
 
-
+  $("#wordPuzzle").submit(function(event) {
+    var sentence = $("#sentence").val().toUpperCase();
+    var vowels = ['A', 'E', 'I', 'O', 'U', 'Y'];
+    for (var i = 0; i < sentence.length; i++) {
+      for (var v = 0; v < vowels.length; v++) {
+        if (sentence.charAt(i) === vowels[v]) {
+          sentence = sentence.replace(sentence.charAt(i),"-");
+          // return sentence;
+        };
+    };
+  };
+  $("#replaceVowels").append("<li>" + sentence + "</li>");
+  event.preventDefault();
+  });
 });
