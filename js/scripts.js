@@ -18,12 +18,11 @@ $(document).ready(function() {
     }
     else {
       for (var count = 0; count <= firstNumber; count += secondNumber) {
-    $("#countResult").append("<li>" + count + "</li>");
+        $("#countResult").append("<li>" + count + "</li>");
       };
     };
-  event.preventDefault();
+    event.preventDefault();
   });
-
   $("#wordPuzzle").submit(function(event) {
     var sentence = $("#sentence").val().toUpperCase();
     var vowels = ['A', 'E', 'I', 'O', 'U', 'Y'];
@@ -33,9 +32,33 @@ $(document).ready(function() {
           sentence = sentence.replace(sentence.charAt(i),"-");
           // return sentence;
         };
+      };
     };
-  };
-  $("#replaceVowels").append("<li>" + sentence + "</li>");
-  event.preventDefault();
+    $("#replaceVowels").append("<li>" + sentence + "</li>");
+    event.preventDefault();
+  });
+
+  $("#factorial").submit(function(event) {
+    debugger;
+    var total = 0;
+    var n = parseInt($("#factNumber").val());
+    for (var i = n; i > 2; i--) {
+      total = n *= (i - 1);
+    }
+    $("#factResult").append("<li>" + n + "</li>");
+
+      // var number = $("#factNumber").val();
+      // // var control = $("#factNumber").val();
+      // var factorial = function() {
+      //   if (control <= 1) {
+      //     $("#factResult").append("<li>" + number + "</li>");
+      //   } else {
+      //     return number * (number - 1);
+      //     factorial(number);
+      //   };
+      // };
+      // factorial(number);
+
+    event.preventDefault();
   });
 });
