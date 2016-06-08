@@ -1,64 +1,40 @@
 
 $(document).ready(function() {
-  $("#countUpBy").submit(function(event) {
+  $("#go").click(function() {
     debugger;
-    var firstNumber = parseInt($("#firstNumber").val());
-    var secondNumber = parseInt($("#secondNumber").val());
-    if (isNaN(firstNumber) || isNaN(secondNumber)) {
-      alert("only numbers please");
-    }
-    else if (firstNumber === "" || secondNumber === "") {
-      alert("please fill out all the fields");
-    }
-    else if (firstNumber <= 0 || secondNumber <= 0) {
-      alert("Only positive numbers.");
-    }
-    else if (firstNumber < secondNumber) {
-      alert("Make sure your end value is larger than the number you are counting up by");
-    }
-    else {
-      for (var count = 0; count <= firstNumber; count += secondNumber) {
-        $("#countResult").append("<li>" + count + "</li>");
-      };
-    };
-    event.preventDefault();
-  });
-  $("#wordPuzzle").submit(function(event) {
-    var sentence = $("#sentence").val().toUpperCase();
-    var vowels = ['A', 'E', 'I', 'O', 'U', 'Y'];
-    for (var i = 0; i < sentence.length; i++) {
+    var word = $("#sentence").val();
+    var vowels = ['a' , 'e', 'i', 'o', 'u', 'y'];
+
+    if (word.charAt(0) === "q" && word.charAt(1) === "u") {
+      word = word.replace("qu", "");
+      word = word + "quay";
+    } else {
       for (var v = 0; v < vowels.length; v++) {
-        if (sentence.charAt(i) === vowels[v]) {
-          sentence = sentence.replace(sentence.charAt(i),"-");
-          // return sentence;
+        if (word.charAt(0) === vowels[v]) {
+          word = word + "ay";
+        } else {
+          for (var i = 0; i < word.length; i++) {
+            for (var j = 0; j < vowels.length; j++) {
+              if (word.charAt(i) === vowels[j]) {
+                word = word.slice(i) + word.slice(0, i) + "ay";
+                break;
+              };
+              if (word.charAt(0) === vowels[j]) {
+                break;
+              };
+            };
+            if (word.charAt(0) === vowels[j]) {
+              break;
+            };
+          };
         };
+        break;
       };
     };
-    $("#replaceVowels").append("<li>" + sentence + "</li>");
-    event.preventDefault();
-  });
 
-  $("#factorial").submit(function(event) {
-    debugger;
-    var total = 0;
-    var n = parseInt($("#factNumber").val());
-    for (var i = n; i > 2; i--) {
-      total = n *= (i - 1);
-    }
-    $("#factResult").append("<li>" + n + "</li>");
 
-      // var number = $("#factNumber").val();
-      // // var control = $("#factNumber").val();
-      // var factorial = function() {
-      //   if (control <= 1) {
-      //     $("#factResult").append("<li>" + number + "</li>");
-      //   } else {
-      //     return number * (number - 1);
-      //     factorial(number);
-      //   };
-      // };
-      // factorial(number);
+    alert(word);
 
-    event.preventDefault();
+
   });
 });
